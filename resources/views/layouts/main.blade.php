@@ -31,7 +31,7 @@
         <nav class="navbar navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="./../AdminLTE-2.3.11/index2.html" class="navbar-brand"><b>超市进销存</b>系统</a>
+                    <a href="{{ url('/home') }}" class="navbar-brand"><b>超市进销存</b>系统</a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                         <i class="fa fa-bars"></i>
                     </button>
