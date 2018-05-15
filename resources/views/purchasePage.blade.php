@@ -23,7 +23,7 @@
                                     <th class="sorting_desc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">编号</th>
                                     <th class="sorting_desc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">类别</th>
                                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" >名称</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" >商标</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" >品牌</th>
                                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" >价格</th>
                                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" >数量</th>
                                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" >大小</th>

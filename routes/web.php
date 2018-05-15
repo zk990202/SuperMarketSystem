@@ -32,6 +32,8 @@ Route::group(['middleware' => 'auth'], function(){
         //下架商品
         Route::get('/drop-off-page', ['uses' => 'MainController@dropOffPage', 'as' => 'drop-off-page']);
         Route::post('/drop-off', 'MainController@dropOff');
+        //查询下架信息
+        Route::get('/drop-off/select', 'MainController@dropOffSelect');
 
         //统计销售情况
         Route::get('/statistics/day', 'MainController@statisticsDay');
@@ -48,6 +50,9 @@ Route::group(['middleware' => 'auth'], function(){
         //对缺货的商品进行进货
         Route::get('/purchase-page', 'MainController@purchasePage');
         Route::post('/purchase', 'MainController@purchase');
+        //进货新的商品
+        Route::get('/purchase-new-page', 'MainController@purchaseNewPage');
+        Route::post('/purchase-new', 'MainController@purchaseNew');
     });
 
 
@@ -60,7 +65,8 @@ Route::group(['middleware' => 'auth'], function(){
 
 
 
-Route::get('test', 'MainController@test');
+Route::get('/test', 'MainController@test');
+Route::get('/test/export', 'ExcelController@export');
 
 
 Auth::routes();
