@@ -28,8 +28,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="price">价格</label>
+                        <label for="price">价格(售价)</label>
                         <input type="text" class="form-control" name="price">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="price">进价</label>
+                        <input type="text" class="form-control" name="purchase_price">
                     </div>
 
                     <div class="form-group">

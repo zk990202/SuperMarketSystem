@@ -492,6 +492,7 @@ class MainController extends Controller
         $name = $request->input('name');
         $brand = $request->input('brand');
         $price = $request->input('price');
+        $purchase_price = $request->input('purchase_price');
         $amount = $request->input('amount');
         $size = $request->input('size');
         $color = $request->input('color');
@@ -499,14 +500,36 @@ class MainController extends Controller
         $date = $request->input('date');
         $place = $request->input('place');
 
+        date_default_timezone_set('Asia/Shanghai');
+        $current_time = date('Y-m-d');
+
         if ($category == '服装'){
-            DB::insert('INSERT INTO products(category, name, brand, price, amount, size, color, forcrowd ) 
+            DB::transaction(function () use ($category, $name, $brand, $price, $amount, $size, $color, $for_crowd, $purchase_price, $current_time){
+                DB::insert('INSERT INTO products(category, name, brand, price, amount, size, color, forcrowd ) 
                       VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-                [$category, $name, $brand, $price, $amount, $size, $color, $for_crowd]);
+                    [$category, $name, $brand, $price, $amount, $size, $color, $for_crowd]);
+
+                $pid = DB::select('SELECT MAX(id) AS max_id FROM products');
+                $pid = $pid[0]->max_id;
+
+                $total_price = $purchase_price * $amount;
+                DB::insert('INSERT INTO purchase_records(time, pid, pamount, unitprice, totalprice) VALUES (?, ?, ?, ?, ?)',
+                    [$current_time, $pid, $amount, $purchase_price, $total_price]);
+            });
+
         }elseif ($category == '食品'){
-            DB::insert('INSERT INTO products(category, name, brand, price, amount, date, place ) 
+            DB::transaction(function () use ($category, $name, $brand, $price, $amount, $date, $place, $purchase_price, $current_time){
+                DB::insert('INSERT INTO products(category, name, brand, price, amount, date, place ) 
                       VALUES (?, ?, ?, ?, ?, ?, ?)',
-                [$category, $name, $brand, $price, $amount, $date, $place]);
+                    [$category, $name, $brand, $price, $amount, $date, $place]);
+
+                $pid = DB::select('SELECT MAX(id) FROM products');
+                $pid = $pid[0]->max_id;
+
+                $total_price = $purchase_price * $amount;
+                DB::insert('INSERT INTO purchase_records(time, pid, pamount, unitprice, totalprice) VALUES (?, ?, ?, ?, ?)',
+                    [$current_time, $pid, $amount, $purchase_price, $total_price]);
+            });
         }
         $viewData = [
             'user' => $user,
