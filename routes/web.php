@@ -41,8 +41,11 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/statistics/month', 'MainController@statisticsMonth');
         Route::get('/statistics/season', 'MainController@statisticsSeason');
         Route::get('/statistics/year', 'MainController@statisticsYear');
+
+        Route::get('/statistics/brand', 'MainController@statisticsBrand');
         //导出Excel
         Route::post('/excel/export', 'MainController@excelExport');
+        Route::post('/excel/export-brand', 'MainController@excelExportBrand');
     });
 
 

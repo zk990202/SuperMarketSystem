@@ -14,6 +14,8 @@
                     --过去一季度
                 @elseif($type == 'year')
                     --过去一年
+                @elseif($type == 'brand')
+                    --按品牌统计
                 @endif
             </h3>
         </div>

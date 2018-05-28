@@ -32,6 +32,7 @@
                             <button class="form-control"><a href="{{ url('/statistics/month') }}">本月</a></button>
                             <button class="form-control"><a href="{{ url('/statistics/season') }}">本季度</a></button>
                             <button class="form-control"><a href="{{ url('/statistics/year') }}">今年</a></button>
+                            <button class="form-control"><a href="{{ url('/statistics/brand') }}">按品牌统计</a></button>
                         </div>
                     @elseif($user->role == '3')
                         <div class="form-group">

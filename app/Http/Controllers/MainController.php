@@ -388,6 +388,38 @@ class MainController extends Controller
         return view('statistics', ['user' => $user, 'result' => $result, 'type' => 'year']);
     }
 
+    public function statisticsBrand(){
+        $user = Auth::user();
+
+        $result = DB::select('SELECT P.brand, SUM(S.totalprice) AS all_price
+             FROM sales_records S
+             JOIN products P ON S.pid = P.id
+             WHERE is_drop = 0
+             GROUP BY P.brand');
+        return view('statisticsBrand', ['user' => $user, 'result' => $result]);
+    }
+
+    public function excelExportBrand(Request $request){
+        $brand = $request->input('brand');
+        $all_price = $request->input('all_price');
+        $fileName = "商品销售信息-按品牌统计";
+        $title = [
+            ['商品品牌', '销售总金额']
+        ];
+        $cellData = [];
+        for($i = 0; $i < count($brand); $i++){
+            $cellData[$i] = [$brand[$i], $all_price[$i]];
+        }
+
+        $finalData = array_merge($title, $cellData);
+
+        Excel::create($fileName, function($excel) use ($finalData){
+            $excel->sheet('sales_record', function($sheet) use ($finalData){
+                $sheet->rows($finalData);
+            });
+        })->export('xls');
+    }
+
     public function excelExport(Request $request){
         $pid = $request->input('pid');
         $name = $request->input('name');
