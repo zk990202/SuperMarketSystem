@@ -45,7 +45,9 @@
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->brand }}</td>
                                         <td>{{ $item->price }}</td>
-                                        <td>{{ $item->amount }}</td>
+                                        <td>{{ $item->amount }}
+                                            <input type="hidden" name="shen_amount" class="form-control">
+                                        </td>
                                         <td>
                                             @if($item->size)
                                                 {{ $item->size }}

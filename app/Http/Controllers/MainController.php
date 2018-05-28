@@ -552,6 +552,7 @@ class MainController extends Controller
     public function sale(Request $request){
         $user = Auth::user();
         $pid = $request->input('id');
+        $shen_amount = $request->input('shen_amount');
         $s_amount0 = $request->input('s_amount');
         $s_amount1 = array_filter($s_amount0); //去除空值
         $s_amount = [];
@@ -562,6 +563,16 @@ class MainController extends Controller
             $i++;
         }
         for ($j = 0; $j < count($pid); $j++){
+            if ($s_amount[$j] > $shen_amount[$j]){
+                $viewData = [
+                    'user' => $user,
+                    'title' => '提示信息：购买失败',
+                    'message' => '不好意思，您购买的数量超过了现有库存',
+                    'url' => url('/sale-page'),
+                    'url_message' => '继续购买'
+                ];
+                return view('CommitSuccessfully', $viewData);
+            }
 //            date_default_timezone_set('Asia/Shanghai');
 //            $current_time = date('Y-m-d');
 //
